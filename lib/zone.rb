@@ -14,10 +14,10 @@ class Zone
   attr_accessor :player_position, :world, :items, :debug
   
   def initialize
-    @items           = { '0|0' => [Item.new(name: 'stick', strength: 1)] }
+    @items           = { '0|0' => [Item.new({name: 'stick', strength: 1})] }
     @world           = { '0|0' => "You are in a dense wood." }
     @player_position = '0|0'
-    @debug           = true
+    @debug           = false
   end
   
   def describe
