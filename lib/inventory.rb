@@ -12,7 +12,6 @@ class Inventory
   def add(item)
     self.items.push(item)
     self.strength += item.strength
-    puts self.items.inspect
     "#{item.name} picked up!"
   end
   
@@ -30,5 +29,5 @@ class Inventory
       end
     end
   end
-  
+
 end
