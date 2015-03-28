@@ -13,15 +13,20 @@ class Dispatch
     verb, noun = command.split.map(&:downcase)  
     
     case verb
-    when "help" then help
-    when "move" then self.map.move noun
-    when "attack" then monster.fight()
-    when "pickup" then pickup(noun)
-    when "drop" then inventory.drop(noun)
-    when "dance!" then dance
-    when "burn" then burn
+    when "help"      then help
+    when "inventory" then get_inventory      
+    when "move"      then self.map.move noun
+    when "attack"    then monster.fight()
+    when "pickup"    then pickup(noun)
+    when "drop"      then inventory.drop(noun)
+    when "dance!"    then dance
+    when "burn"      then burn
     else "That's not a command!"
     end
+  end
+
+  def get_inventory
+    inventory.items
   end
 
   def help
