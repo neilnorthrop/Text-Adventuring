@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require './lib/world.rb'
 
-class WorldTest < Minitest::Test
+class WorldTest < MiniTest::Unit::TestCase
 
 	def setup
 		@world = World.new
