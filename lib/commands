@@ -1,4 +1,5 @@
 move - > North, East, South, West
+inventory -> Inventory
 pickup -> Item
 attack -> Monster
 drop -> Item
