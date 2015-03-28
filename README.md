@@ -1,0 +1,1 @@
+Copied code from Ruby Brightnight group. Trying to expand on it.
