@@ -1,11 +1,11 @@
-require_relative 'zone'
+require_relative 'world'
 require_relative 'inventory'
 
 class Dispatch
   attr_accessor :map, :inventory
   
   def initialize
-    @map       = Zone.new
+    @map       = World.new
     @inventory = Inventory.new
   end
   
