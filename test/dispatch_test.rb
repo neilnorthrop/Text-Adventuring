@@ -24,6 +24,7 @@ class DispatchTest < MiniTest::Unit::TestCase
   def test_dispatch_to_list_inventory
     expected_item = Item.new({"name" => "test", "strength" => 1})
     @dispatch.inventory.items << expected_item
+    
     assert_equal @dispatch.inventory.items, @dispatch.execute("inventory")
   end
 
