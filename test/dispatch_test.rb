@@ -10,10 +10,11 @@ class DispatchTest < MiniTest::Unit::TestCase
     @dispatch = Dispatch.new
     @expected_item = Item.new({"name" => "test", "strength" => 1})
     @second_item = Item.new({"name" => "cat", "strength" => 2})
+    @help_string = "list of words you can use: move, inventory, attack, pickup, drop, and dance!"
   end
 
   def test_execute_command
-    assert_equal "list of words you can use: move, attack, pickup, drop, and dance!", @dispatch.execute("help\r")
+    assert_equal @help_string, @dispatch.execute("help\r")
     assert_equal "That's not a command!", @dispatch.execute("lakjsd;lkfjks")
   end
 
