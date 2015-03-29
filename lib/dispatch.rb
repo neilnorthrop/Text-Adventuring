@@ -26,7 +26,12 @@ class Dispatch
   end
 
   def get_inventory
-    inventory.items
+    inventory_string = "You have: "
+    inventory.items.each do |item|
+      inventory_string += "#{item.name} with a strength of #{item.strength}"
+      inventory_string += ", " if inventory.items.size > 1
+    end
+    return inventory_string
   end
 
   def help
