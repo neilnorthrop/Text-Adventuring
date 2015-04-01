@@ -19,7 +19,7 @@ class Inventory
     item = search_items(item_name)
     self.items.delete(item)
     self.strength -= item.strength
-    "#{item.name} dropped!"
+    return "#{item.name} dropped!", item
   end
 
   def search_items(item_name)

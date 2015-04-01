@@ -18,11 +18,17 @@ class Dispatch
     when "move"      then self.map.move noun
     when "attack"    then monster.fight()
     when "pickup"    then pickup(noun)
-    when "drop"      then inventory.drop(noun)
+    when "drop"      then drop(noun)
     when "dance!"    then dance
     when "burn"      then burn
     else "That's not a command!"
     end
+  end
+
+  def drop(noun)
+    string, item = inventory.drop(noun)
+    map.drop_item(item)
+    string
   end
 
   def get_inventory

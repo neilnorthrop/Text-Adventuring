@@ -60,5 +60,9 @@ class World
   def current_item
     world[player_position].item
   end
+
+  def drop_item(item)
+    world[player_position].item << item
+  end
   
 end
