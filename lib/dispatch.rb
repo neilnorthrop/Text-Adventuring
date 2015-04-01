@@ -39,7 +39,7 @@ class Dispatch
   end
 
   def pickup(noun)
-    current_item = self.map.items[self.map.player_position]
+    current_item = self.map.current_item
     inventory.add(current_item.shift)
   end
 

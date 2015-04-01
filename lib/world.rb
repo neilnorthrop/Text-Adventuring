@@ -17,7 +17,7 @@ class World
   
   def initialize
     @player_position = '0|0'
-    @world           = { player_position => Zone.new("You are in a dense wood.", Item.new({"name" => "stick", "strength" => 1})) }
+    @world           = { player_position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
   end
   
   def move(direction)
@@ -40,22 +40,25 @@ class World
     generate(position)
     self.player_position = position
     
-    describe
+    world[position].describe
   end
   
   def generate(position)
     return if self.world[position]
 
-    self.world[position] = SCENES.sample
-    existing_items       = self.items[position]
+    description = SCENES.sample
+    # self.world[position] = SCENES.sample
+    # existing_items = world[position].item
     
     if rand(1..2).even?
-      if existing_items
-        self.items[position] << Item.random
-      else
-        self.items[position] = [Item.random]
-      end
+      world[position] = Zone.new(description, [Item.random])
+    else
+      world[position] = Zone.new(description)
     end
+  end
+
+  def current_item
+    world[player_position].item
   end
   
 end

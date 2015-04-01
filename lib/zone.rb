@@ -1,12 +1,10 @@
-require_relative 'item'
-
 class Zone
   attr_accessor :description, :item, :debug
 
-  def initialize(description, item)
+  def initialize(description, item=[])
     @description = description
-    @item        = [item]
-    @debug       = true
+    @item        = item
+    @debug       = false
   end
   
   def describe
@@ -16,15 +14,16 @@ class Zone
     description       = "#{world_description}\n"
     
     
-    if items_here
-      description << "You look about and see: #{item_descriptions.join(', ')}.\n"
+    if !items_here.empty?
+      description += "You look about and see: #{item_descriptions.join(', ')}.\n"
     end
 
     if self.debug
-      description << "items: #{self.item.inspect}\n"
-      description << "world: #{self.describe.inspect}\n"
+      description += "items: #{self.item.inspect}\n"
+      description += "world: #{self.description.inspect}\n"
     end
 
     description
   end
+
 end
