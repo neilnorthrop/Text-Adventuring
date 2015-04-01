@@ -1,4 +1,5 @@
 require_relative 'item'
+require_relative 'zone'
 
 class World
 
@@ -11,33 +12,12 @@ class World
     "You stand before an army of goblins, poised to attack.",
     "You're standing in a sea of roses. You smell blood in the air."
   ]
-  attr_accessor :player_position, :world, :items, :debug
+
+  attr_accessor :player_position, :world, :items
   
   def initialize
-    @items           = { '0|0' => [Item.new({"name" => "stick", "strength" => 1})] }
-    @world           = { '0|0' => "You are in a dense wood." }
     @player_position = '0|0'
-    @debug           = false
-  end
-  
-  def describe
-    world_description = self.world[self.player_position]
-    items_here        = self.items[self.player_position]
-    item_descriptions = items_here.map(&:name) if items_here
-    description       = "#{world_description}\n"
-    
-    
-    if items_here
-      description << "You look about and see: #{item_descriptions.join(', ')}.\n"
-    end
-
-    if self.debug
-      description << "player_position: #{self.player_position}\n"
-      description << "items: #{self.items.inspect}\n"
-      description << "world: #{self.world.inspect}\n"
-    end
-
-    description
+    @world           = { player_position => Zone.new("You are in a dense wood.", Item.new({"name" => "stick", "strength" => 1})) }
   end
   
   def move(direction)
