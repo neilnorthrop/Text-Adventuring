@@ -10,12 +10,20 @@ class InventoryTest < MiniTest::Unit::TestCase
   end
 
   def test_add_item
-    assert_equal "test_item picked up!", @inventory.add(@item)
+    @inventory.add(@item)
+    assert_equal @item, @inventory.items.last
+    assert_equal 1, @inventory.strength
+
+    second_item = Item.random
+    expected_strength = @inventory.strength + second_item.strength
+    @inventory.add(second_item)
+    assert_equal second_item, @inventory.items.last
+    assert_equal expected_strength, @inventory.strength
   end
 
   def test_drop_item
     @inventory.add(@item)
-    assert_equal "test_item dropped!", @inventory.drop(@item.name)
+    assert_equal @item, @inventory.drop(@item.name)
   end
 
   def test_search_items

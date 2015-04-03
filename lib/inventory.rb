@@ -12,14 +12,13 @@ class Inventory
   def add(item)
     self.items.push(item)
     self.strength += item.strength
-    "#{item.name} picked up!"
   end
   
   def drop(item_name)
     item = search_items(item_name)
     self.items.delete(item)
     self.strength -= item.strength
-    return "#{item.name} dropped!", item
+    item
   end
 
   def search_items(item_name)
