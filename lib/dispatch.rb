@@ -2,11 +2,12 @@ require_relative 'world'
 require_relative 'inventory'
 
 class Dispatch
-  attr_accessor :map, :inventory
+  attr_accessor :map, :player, :inventory
   
   def initialize
     @map       = World.new
-    @inventory = Inventory.new
+    @player    = map.player
+    @inventory = player.inventory
   end
   
   def execute(command)

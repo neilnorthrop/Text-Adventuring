@@ -1,5 +1,6 @@
 require_relative 'item'
 require_relative 'zone'
+require_relative 'player'
 
 class World
 
@@ -13,15 +14,15 @@ class World
     "You're standing in a sea of roses. You smell blood in the air."
   ]
 
-  attr_accessor :player_position, :world, :items
+  attr_accessor :player, :world, :items
   
   def initialize
-    @player_position = '0|0'
-    @world           = { player_position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
+    @player = Player.new
+    @world           = { player.position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
   end
   
   def move(direction)
-    x, y = self.player_position.split('|').map(&:to_i)
+    x, y = self.player.position.split('|').map(&:to_i)
     
     case direction.downcase
     when "north"
@@ -37,7 +38,7 @@ class World
     position = "#{x}|#{y}"
     
     generate(position)
-    self.player_position = position
+    self.player.update_position(position)
     
     world[position].describe
   end
@@ -55,11 +56,11 @@ class World
   end
 
   def current_item
-    world[player_position].item
+    world[player.position].item
   end
 
   def drop_item(item)
-    world[player_position].item << item
+    world[player.position].item << item
   end
   
 end
