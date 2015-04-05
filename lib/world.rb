@@ -21,8 +21,7 @@ class World
   end
   
   def move(direction)
-    xy   = self.player_position.split('|').map(&:to_i)
-    x, y = xy
+    x, y = self.player_position.split('|').map(&:to_i)
     
     case direction.downcase
     when "north"
@@ -47,8 +46,6 @@ class World
     return if self.world[position]
 
     description = SCENES.sample
-    # self.world[position] = SCENES.sample
-    # existing_items = world[position].item
     
     if rand(1..2).even?
       world[position] = Zone.new(description, [Item.random])
