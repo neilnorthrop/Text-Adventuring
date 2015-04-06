@@ -15,6 +15,7 @@ class Dispatch
     
     case verb
     when "help"      then help
+    when "look"      then look
     when "inventory" then get_inventory      
     when "move"      then self.map.move noun
     when "attack"    then monster.fight()
@@ -24,6 +25,10 @@ class Dispatch
     when "burn"      then burn
     else "That's not a command!"
     end
+  end
+
+  def look
+    map.describe
   end
 
   def drop(noun)
@@ -42,7 +47,7 @@ class Dispatch
   end
 
   def help
-    "list of words you can use: move, inventory, attack, pickup, drop, and dance!"
+    "list of words you can use: look, move, inventory, attack, pickup, drop, and dance!"
   end
 
   def pickup(noun)

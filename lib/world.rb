@@ -18,7 +18,7 @@ class World
   
   def initialize
     @player = Player.new
-    @world           = { player.position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
+    @world  = { player.position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
   end
   
   def move(direction)
@@ -40,7 +40,7 @@ class World
     generate(position)
     self.player.update_position(position)
     
-    world[position].describe
+    describe
   end
   
   def generate(position)
@@ -61,6 +61,10 @@ class World
 
   def drop_item(item)
     world[player.position].item << item
+  end
+
+  def describe
+    world[player.position].describe
   end
   
 end
