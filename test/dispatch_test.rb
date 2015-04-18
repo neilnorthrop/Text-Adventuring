@@ -14,7 +14,6 @@ class DispatchTest < MiniTest::Unit::TestCase
   end
 
   def test_execute_command
-    assert_equal @help_string, @dispatch.execute("help\r")
     assert_equal "That's not a command!", @dispatch.execute("lakjsd;lkfjks")
   end
 
@@ -31,10 +30,17 @@ class DispatchTest < MiniTest::Unit::TestCase
   end
 
   def test_get_inventory_with_multiple_items
-    expected_string = "You have: test with a strength of 1, cat with a strength of 2"
+    expected_string = "You have: test with a strength of 1 and cat with a strength of 2"
     @dispatch.inventory.items << @expected_item << @second_item
 
     assert_equal expected_string, @dispatch.get_inventory
+  end
+
+  def test_list
+    expected_string = "me, you, and I"
+    actual_array    = ["me", "you", "I"]
+
+    assert_equal expected_string, @dispatch.list(actual_array)
   end
 
 end

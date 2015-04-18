@@ -3,6 +3,17 @@ require_relative 'inventory'
 
 class Dispatch
   attr_accessor :map, :player, :inventory
+
+  COMMANDS = [
+    "look",
+    "move",
+    "inventory",
+    "attack",
+    "pickup",
+    "drop",
+    "exit",
+    "dance"
+  ]
   
   def initialize
     @map       = World.new
@@ -43,11 +54,12 @@ class Dispatch
       inventory_array << "#{item.name} with a strength of #{item.strength}"
     end
 
-    return "You have: " + inventory_array.join(', ')
+    # return "You have: " + inventory_array.join(', ')
+    return "You have: " + list(inventory_array)
   end
 
   def help
-    "list of words you can use: look, move, inventory, attack, pickup, drop, exit, and dance!"
+    "list of words you can use: #{list(COMMANDS)}!"
   end
 
   def pickup(noun)
@@ -65,6 +77,11 @@ class Dispatch
     "The angels will weep for a thousand years for your treacherous betrayal of people and country.\r\n" +
     "Thank you for playing.\r\n" +
     "<3 BenBen!\r\n"
+  end
+
+  def list(commands)
+    commands[-1].insert(0, "and ") if commands.size > 1
+    commands.size > 2 ? commands.join(", ") : commands.join(" ") 
   end
 
 end
