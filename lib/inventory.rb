@@ -1,11 +1,9 @@
 class Inventory
 
   attr_accessor :items, :strength
-  # @@items = []
-  # @@strength = 0
 
   def initialize
-    @items = []
+    @items    = []
     @strength = 0
   end
   

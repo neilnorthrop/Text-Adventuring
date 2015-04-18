@@ -47,7 +47,7 @@ class Dispatch
   end
 
   def help
-    "list of words you can use: look, move, inventory, attack, pickup, drop, and dance!"
+    "list of words you can use: look, move, inventory, attack, pickup, drop, exit, and dance!"
   end
 
   def pickup(noun)
