@@ -54,7 +54,6 @@ class Dispatch
       inventory_array << "#{item.name} with a strength of #{item.strength}"
     end
 
-    # return "You have: " + inventory_array.join(', ')
     return "You have: " + list(inventory_array)
   end
 

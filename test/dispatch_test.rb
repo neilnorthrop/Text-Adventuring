@@ -7,10 +7,10 @@ require './lib/item.rb'
 class DispatchTest < MiniTest::Unit::TestCase
 
   def setup
-    @dispatch = Dispatch.new
+    @dispatch      = Dispatch.new
     @expected_item = Item.new({"name" => "test", "strength" => 1})
-    @second_item = Item.new({"name" => "cat", "strength" => 2})
-    @help_string = "list of words you can use: move, inventory, attack, pickup, drop, and dance!"
+    @second_item   = Item.new({"name" => "cat", "strength" => 2})
+    @help_string   = "list of words you can use: move, inventory, attack, pickup, drop, and dance!"
   end
 
   def test_execute_command
