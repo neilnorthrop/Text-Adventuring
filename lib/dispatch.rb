@@ -83,4 +83,9 @@ class Dispatch
     commands.size > 2 ? commands.join(", ") : commands.join(" ") 
   end
 
+  def prefix(word)
+    pattern = /a|e|i|o|u/
+    pattern.match(word[0]) ? word.insert(0, "an ") : word.insert(0, "a ")
+  end
+
 end

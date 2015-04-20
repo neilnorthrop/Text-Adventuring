@@ -43,4 +43,9 @@ class DispatchTest < MiniTest::Unit::TestCase
     assert_equal expected_string, @dispatch.list(actual_array)
   end
 
+  def test_prefix
+    assert_equal "a dog", @dispatch.prefix("dog")
+    assert_equal "an axe", @dispatch.prefix("axe")
+  end
+
 end
