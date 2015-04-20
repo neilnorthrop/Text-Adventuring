@@ -40,6 +40,8 @@ class World
     generate(position)
     self.player.update_position(position)
     
+    print `clear`
+
     describe
   end
   
