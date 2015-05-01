@@ -48,4 +48,21 @@ class DispatchTest < MiniTest::Unit::TestCase
     assert_equal "an axe", @dispatch.prefix("axe")
   end
 
+  def test_pickup
+    expected_string = "Stick picked up!"
+
+    assert_equal expected_string, @dispatch.pickup("stick")
+
+    expected_string = "Could not find a tick!"
+    @dispatch.map = World.new
+
+    assert_equal expected_string, @dispatch.pickup("tick")
+
+    expected_string = "Nothing to pick up!"
+    zone = Zone.new("Test Zone")
+    @dispatch.map.world["0|0"] = zone
+
+    assert_equal expected_string, @dispatch.pickup("something")
+  end
+
 end

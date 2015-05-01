@@ -62,9 +62,18 @@ class Dispatch
   end
 
   def pickup(noun)
-    current_item = self.map.current_item.shift
-    inventory.add(current_item)
-    "#{current_item.name} picked up!"
+    if self.map.current_item.empty?
+      "Nothing to pick up!"
+    else
+      current_item = self.map.current_item.shift
+      if current_item.name == noun
+        inventory.add(current_item)
+        "#{current_item.name.capitalize} picked up!"
+      else
+        self.map.current_item << current_item
+        "Could not find a #{noun}!"
+      end
+    end
   end
 
   def dance
