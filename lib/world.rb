@@ -22,23 +22,10 @@ class World
   end
   
   def move(direction)
-    x, y = self.player.position.split('|').map(&:to_i)
+    new_position = get_new_position(direction)
     
-    case direction.downcase
-    when "north"
-      y += 1
-    when "south"
-      y -= 1
-    when "east"
-      x += 1
-    when "west"
-      x -= 1
-    end
-    
-    position = "#{x}|#{y}"
-    
-    generate(position)
-    self.player.update_position(position)
+    generate(new_position)
+    self.player.update_position(new_position)
     
     print `clear`
 
@@ -50,7 +37,7 @@ class World
 
     description = SCENES.sample
     
-    if rand(1..2).even?
+    if rand(1..3).even?
       world[position] = Zone.new(description, [Item.random])
     else
       world[position] = Zone.new(description)
@@ -67,6 +54,23 @@ class World
 
   def describe
     world[player.position].describe
+  end
+
+  def get_new_position(direction)
+    x, y = self.player.position.split('|').map(&:to_i)
+    
+    case direction.downcase
+    when "north"
+      y += 1
+    when "south"
+      y -= 1
+    when "east"
+      x += 1
+    when "west"
+      x -= 1
+    end
+    
+    "#{x}|#{y}"
   end
   
 end
