@@ -1,5 +1,4 @@
 require_relative 'world'
-require_relative 'inventory'
 
 class Dispatch
   attr_accessor :map, :player, :inventory
