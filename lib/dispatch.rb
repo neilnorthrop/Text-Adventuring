@@ -11,7 +11,7 @@ class Dispatch
     'inventory' => 'get_inventory',
     'attack'    => 'monster.fight',
     'pickup'    => 'pickup noun',
-    'drop'      => 'drop, noun',
+    'drop'      => 'drop noun',
     'exit'      => 'exit',
     'dance'     => 'dance',
     'burn'      => 'burn'
