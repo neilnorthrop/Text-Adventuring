@@ -24,7 +24,7 @@ class Dispatch
   end
   
   def execute(command)
-    verb, noun = command.split.map(&:downcase)
+    verb, noun = split(command)
 
     COMMANDS.each do |k,v|
       if k == verb
@@ -99,6 +99,13 @@ class Dispatch
   def prefix(word)
     pattern = /a|e|i|o|u/
     pattern.match(word[0]) ? word.insert(0, "an ") : word.insert(0, "a ")
+  end
+
+  def split(command)
+    command_list = command.split.map(&:downcase)
+    verb = command_list.shift
+    noun = command_list.join(' ')
+    return verb, noun
   end
 
 end

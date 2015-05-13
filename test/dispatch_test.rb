@@ -65,4 +65,9 @@ class DispatchTest < MiniTest::Unit::TestCase
     assert_equal expected_string, @dispatch.pickup('something')
   end
 
+  def test_split
+    assert_equal ['pickup', 'stick'], @dispatch.split('pickup stick')
+    assert_equal ['pickup', 'true love'], @dispatch.split('pickup true love')
+  end
+
 end
