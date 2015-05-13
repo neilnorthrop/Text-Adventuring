@@ -3,16 +3,18 @@ require_relative 'world'
 class Dispatch
   attr_accessor :map, :player, :inventory
 
-  COMMANDS = [
-    "look",
-    "move",
-    "inventory",
-    "attack",
-    "pickup",
-    "drop",
-    "exit",
-    "dance"
-  ]
+  COMMANDS = {
+    'help'      => 'help',
+    'look'      => 'look',
+    'move'      => 'map.send(:move, noun)',
+    'inventory' => 'get_inventory',
+    'attack'    => 'monster.fight',
+    'pickup'    => 'pickup noun',
+    'drop'      => 'drop, noun',
+    'exit'      => 'exit',
+    'dance'     => 'dance',
+    'burn'      => 'burn'
+  }
   
   def initialize
     @map       = World.new
@@ -21,20 +23,15 @@ class Dispatch
   end
   
   def execute(command)
-    verb, noun = command.split.map(&:downcase)  
-    
-    case verb
-    when "help"      then help
-    when "look"      then look
-    when "inventory" then get_inventory      
-    when "move"      then self.map.move noun
-    when "attack"    then monster.fight()
-    when "pickup"    then pickup noun
-    when "drop"      then drop noun
-    when "dance!"    then dance
-    when "burn"      then burn
-    else "That's not a command!"
+    verb, noun = command.split.map(&:downcase)
+
+    COMMANDS.each do |k,v|
+      if k == verb
+        return eval(v)
+      end
     end
+
+    return "That's not a command!"
   end
 
   def look
