@@ -59,8 +59,9 @@ class Dispatch
     return "You have: " + list(inventory_array)
   end
 
-  def help
-    "list of words you can use: #{list(COMMANDS)}!"
+  def help    
+    unfrozen_list = COMMANDS.keys.map(&:dup)
+    "list of words you can use: #{list(unfrozen_list)}!"
   end
 
   def pickup(noun)
