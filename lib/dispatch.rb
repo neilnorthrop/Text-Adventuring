@@ -6,6 +6,7 @@ class Dispatch
   COMMANDS = {
     'help'      => 'help',
     'look'      => 'look',
+    'strength'  => 'strength',
     'move'      => 'map.send(:move, noun)',
     'inventory' => 'get_inventory',
     'attack'    => 'monster.fight',
@@ -38,9 +39,14 @@ class Dispatch
     map.describe
   end
 
+  def strength
+    return "Your current strength is: #{player.strength}."
+  end
+
   def drop(noun)
     item = inventory.drop(noun)
     map.drop_item(item)
+    player.update_strength
     return "#{item.name} dropped!"
   end
 
@@ -64,6 +70,7 @@ class Dispatch
       current_item = self.map.current_item.shift
       if current_item.name == noun
         inventory.add(current_item)
+        player.update_strength
         "#{current_item.name.capitalize} picked up!"
       else
         self.map.current_item << current_item
