@@ -1,33 +1,40 @@
 class Zone
-  attr_accessor :description, :item, :debug
+  attr_accessor :description, :items, :debug
+
+  SCENES = [
+    "You are in a dense wood.",
+    "You're just outside of a forest. You can hear a bubbling brook in the distance.",
+    "You're at the edge of a cliff, peering into the dark abyss.",
+    "You're at the top of a waterfall. Make a wish.",
+    "You are deep in a thick jungle. You feel a dark gaze upon you.",
+    "You stand before an ancient temple stretching deep into the ocean.",
+    "You stand before an army of goblins, poised to attack.",
+    "You're standing in a sea of roses. You smell blood in the air."
+  ]
 
   def self.generate
-    new("You are in a dense wood.", [Item.generate])
+    new(SCENES.sample, Item.generate)
   end
 
-  def initialize(description, item=[])
+  def initialize(description, items=[])
     @description = description
-    @item        = item
+    @items       = items
     @debug       = false
   end
   
   def describe
-    world_description = self.description
-    items_here        = self.item
-    item_descriptions = items_here.map(&:name) if items_here
-    description       = "#{world_description}\n"
+    zone_description = "#{self.description.dup}\n"
     
-    
-    if !items_here.empty?
-      description += "You look about and see: #{item_descriptions.join(', ')}.\n"
+    if !items.empty?
+      zone_description += "You look about and see: #{items.map(&:name).join(', ')}.\n"
     end
 
     if self.debug
-      description += "items: #{self.item.inspect}\n"
-      description += "world: #{self.description.inspect}\n"
+      zone_description += "items: #{self.item.inspect}\n"
+      zone_description += "zone: #{self.description.inspect}\n"
     end
 
-    description
+    zone_description
   end
 
 end

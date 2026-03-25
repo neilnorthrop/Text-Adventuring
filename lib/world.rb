@@ -3,17 +3,6 @@ require_relative 'zone'
 require_relative 'player'
 
 class World
-
-  SCENES = [
-    "You're just outside of a forest. You can hear a bubbling brook in the distance.",
-    "You're at the edge of a cliff, peering into the dark abyss.",
-    "You're at the top of a waterfall. Make a wish.",
-    "You are deep in a thick jungle. You feel a dark gaze upon you.",
-    "You stand before an ancient temple stretching deep into the ocean.",
-    "You stand before an army of goblins, poised to attack.",
-    "You're standing in a sea of roses. You smell blood in the air."
-  ]
-
   attr_accessor :player, :world, :items
   
   def initialize
@@ -25,9 +14,7 @@ class World
     new_position = get_new_position(direction)
     
     generate(new_position)
-    self.player.update_position(new_position)
-    
-    print `clear`
+    player.update_position(new_position)
 
     describe
   end
@@ -35,21 +22,15 @@ class World
   def generate(position)
     return if self.world[position]
 
-    description = SCENES.sample
-    
-    if rand(1..3).even?
-      world[position] = Zone.new(description, [Item.random])
-    else
-      world[position] = Zone.new(description)
-    end
+    world[position] = Zone.generate
   end
 
   def current_item
-    world[player.position].item
+    world[player.position].items
   end
 
   def drop_item(item)
-    world[player.position].item << item
+    world[player.position].items << item
   end
 
   def describe

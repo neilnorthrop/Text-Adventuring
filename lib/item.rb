@@ -11,7 +11,8 @@ class Item
   end
 
   def self.generate
-    random
+    return [] if rand(1..7).even?
+    [random]
   end
   
   def initialize(attributes)
