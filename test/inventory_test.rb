@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require './lib/inventory.rb'
 require './lib/item.rb'
 
-class InventoryTest < MiniTest::Unit::TestCase
+class InventoryTest < Minitest::Test
 
   def setup
     @inventory = Inventory.new

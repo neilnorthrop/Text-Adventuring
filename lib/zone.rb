@@ -1,6 +1,10 @@
 class Zone
   attr_accessor :description, :item, :debug
 
+  def self.generate
+    new("You are in a dense wood.", [Item.generate])
+  end
+
   def initialize(description, item=[])
     @description = description
     @item        = item

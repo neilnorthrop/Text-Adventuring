@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require './lib/monster.rb'
 
-class MonsterTest < MiniTest::Unit::TestCase
+class MonsterTest < Minitest::Test
 
   def setup
   end

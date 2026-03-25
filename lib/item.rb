@@ -9,6 +9,10 @@ class Item
     item = YAML.load_file(ITEMS_FILE).sample
     new(item)
   end
+
+  def self.generate
+    random
+  end
   
   def initialize(attributes)
     @strength = attributes["strength"] || false

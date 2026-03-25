@@ -4,7 +4,7 @@ require './lib/zone.rb'
 require './lib/inventory.rb'
 require './lib/item.rb'
 
-class DispatchTest < MiniTest::Unit::TestCase
+class DispatchTest < Minitest::Test
 
   def setup
     @dispatch      = Dispatch.new
@@ -14,7 +14,7 @@ class DispatchTest < MiniTest::Unit::TestCase
   end
 
   def test_execute_command
-    assert_equal "That's not a command!", @dispatch.execute('lakjsd;lkfjks')
+    assert_equal 'That is not a command.', @dispatch.execute('lakjsd;lkfjks')
   end
 
   def test_responds_to
@@ -26,11 +26,11 @@ class DispatchTest < MiniTest::Unit::TestCase
   def test_get_inventory_with_single_item
     @dispatch.inventory.items << @expected_item
 
-    assert_equal 'You have: test with a strength of 1', @dispatch.execute('inventory')
+    assert_equal 'You have: 1 - test with a strength of 1', @dispatch.execute('inventory')
   end
 
   def test_get_inventory_with_multiple_items
-    expected_string = 'You have: test with a strength of 1 and cat with a strength of 2'
+    expected_string = 'You have: 1 - test with a strength of 1 and 2 - cat with a strength of 2'
     @dispatch.inventory.items << @expected_item << @second_item
 
     assert_equal expected_string, @dispatch.get_inventory
@@ -49,7 +49,7 @@ class DispatchTest < MiniTest::Unit::TestCase
   end
 
   def test_pickup
-    expected_string = 'Stick picked up!'
+    expected_string = 'Could not find a stick!'
 
     assert_equal expected_string, @dispatch.pickup('stick')
 

@@ -26,13 +26,7 @@ class Dispatch
   def execute(command)
     verb, noun = split(command)
 
-    COMMANDS.each do |k,v|
-      if k == verb
-        return eval(v)
-      end
-    end
-
-    return "That's not a command!"
+    return eval(COMMANDS.fetch(verb) { |verb| return "That is not a command." })
   end
 
   def look
@@ -52,8 +46,8 @@ class Dispatch
 
   def get_inventory
     inventory_array = []
-    inventory.items.each do |item|
-      inventory_array << "#{item.name} with a strength of #{item.strength}"
+    inventory.items.each_with_index do |item, index|
+      inventory_array << "#{index + 1} - #{item.name} with a strength of #{item.strength}"
     end
 
     return "You have: " + list(inventory_array)
@@ -91,14 +85,18 @@ class Dispatch
     "<3 BenBen!\r\n"
   end
 
-  def list(commands)
-    commands[-1].insert(0, "and ") if commands.size > 1
-    commands.size > 2 ? commands.join(", ") : commands.join(" ") 
+  def list(array)
+    if array.count > 1
+      array[-1].insert(0, 'and ')
+      return array.join(', ') if array.count > 2
+    end
+
+    array.join(' ')
   end
 
   def prefix(word)
     pattern = /a|e|i|o|u/
-    pattern.match(word[0]) ? word.insert(0, "an ") : word.insert(0, "a ")
+    pattern.match(word[0]) ? word.insert(0, 'an ') : word.insert(0, 'a ')
   end
 
   def split(command)

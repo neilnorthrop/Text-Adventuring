@@ -4,12 +4,14 @@ class Cli
   attr_accessor :dispatch
   
   def initialize
+    @ftty = File.new('/dev/tty')
     @dispatch = Dispatch.new
   end
   
   def start
     system("clear") or system("cls")
-    puts 'Welcome to Ben Ben Bang!'
+    puts "Welcome to Ben Ben Bang!"
+    puts dispatch.help
     
     infinity = true
     while infinity

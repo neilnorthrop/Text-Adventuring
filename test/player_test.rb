@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require './lib/player.rb'
 
-class PlayerTest < MiniTest::Unit::TestCase
+class PlayerTest < Minitest::Test
 
   def setup
     @player = Player.new

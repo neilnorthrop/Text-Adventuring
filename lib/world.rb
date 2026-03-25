@@ -18,7 +18,7 @@ class World
   
   def initialize
     @player = Player.new
-    @world  = { player.position => Zone.new("You are in a dense wood.", [Item.new({"name" => "stick", "strength" => 1})]) }
+    @world  = { player.position => Zone.generate }
   end
   
   def move(direction)

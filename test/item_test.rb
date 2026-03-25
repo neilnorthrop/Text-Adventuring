@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require './lib/item.rb'
 
-class ItemTest < MiniTest::Unit::TestCase
+class ItemTest < Minitest::Test
 
 	def setup
     @test_items = { "name" => "cat", "strength" => 1 }

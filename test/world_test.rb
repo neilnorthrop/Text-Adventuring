@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require './lib/world.rb'
 require_relative 'test_helper'
 
-class WorldTest < MiniTest::Unit::TestCase
+class WorldTest < Minitest::Test
 
 	def setup
 		@worldmock = WorldMock.new
