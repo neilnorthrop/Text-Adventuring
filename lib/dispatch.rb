@@ -1,7 +1,7 @@
 require_relative 'world'
 
 class Dispatch
-  attr_accessor :map, :player, :inventory
+  attr_accessor :map, :player, :inventory, :world_display
 
   COMMANDS = {
     'help'      => 'help',
@@ -17,10 +17,15 @@ class Dispatch
     'burn'      => 'burn'
   }
   
-  def initialize
-    @map       = World.new
-    @player    = map.player
-    @inventory = player.inventory
+  def initialize(world)
+    @map           = world
+    @player        = map.player
+    @inventory     = player.inventory
+    @world_display = world.world_display
+  end
+
+  def render_game
+    map.render_world
   end
   
   def execute(command)
@@ -55,7 +60,7 @@ class Dispatch
 
   def help    
     unfrozen_list = COMMANDS.keys.map(&:dup)
-    "list of words you can use: #{list(unfrozen_list)}!"
+    world_display.render_help("Actions you can perform: #{list(unfrozen_list)}!")
   end
 
   def pickup(noun)

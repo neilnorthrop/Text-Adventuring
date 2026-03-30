@@ -2,9 +2,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     rake (10.4.2)
+    terminal-table (4.0.0)
+      unicode-display_width (>= 1.1.1, < 4)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rake
+  terminal-table
+
+BUNDLED WITH
+   2.6.9

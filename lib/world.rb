@@ -1,13 +1,19 @@
 require_relative 'item'
 require_relative 'zone'
 require_relative 'player'
+require_relative 'world_display'
 
 class World
-  attr_accessor :player, :world, :items
+  attr_accessor :player, :world, :world_display, :items
   
   def initialize
-    @player = Player.new
-    @world  = { player.position => Zone.generate }
+    @player        = Player.new
+    @world         = { player.position => Zone.generate }
+    @world_display = WorldDisplay.new
+  end
+
+  def render_world
+    world_display.render
   end
   
   def move(direction)
